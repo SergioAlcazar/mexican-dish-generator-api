@@ -1,7 +1,7 @@
 //Load HTTP module
 const http = require("http");
-const hostname = '127.0.0.1';
-const port = 3000;
+const hostname = process.env.URL || 'localhost';
+const port = process.env.PORT || 3000
 
 const ONE_INGREDIENT = 'one_ingredient';
 const TWO_INGREDIENT = 'two_ingredients';
@@ -13,18 +13,14 @@ const SUFIXES = ['leles', 'toclos', 'males', 'cheles', 'quitos', 'moles', 'potle
 const GARNISHMENTS = [' con Nachos', ' con Totopos', ' con Chipotle', ' con Pico de Gallo', ' con Chiles', ' con Guacamole', ' al Pastor', ' Pibil', ' en Nogada', ' con Mole', ' con Frijoles', ' con Jalapeños'];
 let dish;
 
-//Create HTTP server and listen on port 3000 for requests
 const server = http.createServer((req, res) => {
-  //Set the response HTTP header with HTTP status and Content type
-
   if (req.url != '/favicon.ico') {
     res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
+    res.setHeader('Content-Type', 'text/html');
     res.end(cookDish());
   }
 });
 
-//listen for request on port 3000, and as a callback function have the port listened on logged
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
