@@ -1,6 +1,5 @@
 //Load HTTP module
 const http = require("http");
-const hostname = process.env.URL || 'localhost';
 const port = process.env.PORT || 3000
 
 const ONE_INGREDIENT = 'one_ingredient';
@@ -21,8 +20,8 @@ const server = http.createServer((req, res) => {
   }
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+server.listen(port, () => {
+  console.log(`Server running at port `+ port);
 });
 
 function cookDish() {
