@@ -1,6 +1,6 @@
-//Load HTTP module
-const http = require("http");
-const port = process.env.PORT || 3000
+const express = require('express')
+const app = express();
+const port = process.env.PORT || 3000;
 
 const ONE_INGREDIENT = 'one_ingredient';
 const TWO_INGREDIENT = 'two_ingredients';
@@ -12,16 +12,11 @@ const SUFIXES = ['leles', 'toclos', 'males', 'cheles', 'quitos', 'moles', 'potle
 const GARNISHMENTS = [' con Nachos', ' con Totopos', ' con Chipotle', ' con Pico de Gallo', ' con Chiles', ' con Guacamole', ' al Pastor', ' Pibil', ' en Nogada', ' con Mole', ' con Frijoles', ' con Jalapeños'];
 let dish;
 
-const server = http.createServer((req, res) => {
-  if (req.url != '/favicon.ico') {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/html');
-    res.end(cookDish());
-  }
+app.get('/mexicanDish', (req, res) => {
+  return res.send(cookDish());
 });
-
-server.listen(port, () => {
-  console.log(`Server running at port `+ port);
+app.listen(port, () => {
+  console.log('Example app listening on port ' + port)
 });
 
 function cookDish() {
